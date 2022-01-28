@@ -13,7 +13,7 @@ export default function Browse() {
   const item = items[index]?.data;
 
   function handleClick(e) {
-    const i = e.screenX / document.body.clientWidth > 0.5 ? 1 : -1;
+    const i = e.clientX / document.body.clientWidth > 0.5 ? 1 : -1;
 
     if (index + i >= 0 && index + i < items.length) {
       setIndex(state => state + i);
