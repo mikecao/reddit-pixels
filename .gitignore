@@ -11,13 +11,17 @@
 # next.js
 /.next/
 /out/
+/prisma/schema.prisma
 
 # production
 /build
 
 # misc
 .DS_Store
-*.pem
+.idea
+*.iml
+*.log
+/.vscode/
 
 # debug
 npm-debug.log*
@@ -25,10 +29,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
-.env.local
+.env
 .env.development.local
 .env.test.local
 .env.production.local
-
-# vercel
-.vercel

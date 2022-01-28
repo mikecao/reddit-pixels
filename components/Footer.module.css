@@ -1,0 +1,37 @@
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 1;
+  padding: 10px;
+  color: #fafafa;
+  text-shadow: 1px 1px 1px #111;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+}
+
+.links a {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+}
+
+.links a + a {
+  margin-left: 10px;
+}
+
+.links svg {
+  display: block;
+}

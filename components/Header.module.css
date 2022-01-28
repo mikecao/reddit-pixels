@@ -1,0 +1,28 @@
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: auto;
+  z-index: 1;
+  text-shadow: 1px 1px 1px #111;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  font-size: 12px;
+}
+
+.title {
+  font-size: 16px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  border-bottom-right-radius: 5px;
+}
+
+.links a {
+  display: inline-block;
+  margin-right: 10px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+}

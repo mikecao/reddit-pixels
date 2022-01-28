@@ -1,0 +1,29 @@
+.thumbs {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.thumb {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  flex: 0 0 auto;
+  cursor: pointer;
+}
+
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.button {
+  width: 100px;
+  height: 100px;
+  flex: 0 0 auto;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

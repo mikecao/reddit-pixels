@@ -1,0 +1,16 @@
+.view {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.count {
+  color: #8e8e8e;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  font-size: 12px;
+  padding: 10px;
+}
