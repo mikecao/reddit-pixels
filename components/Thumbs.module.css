@@ -1,7 +1,7 @@
 .thumbs {
-  display: flex;
-  flex-direction: column;
   overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
 }
 
 .thumb {

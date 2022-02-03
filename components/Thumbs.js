@@ -1,6 +1,6 @@
 import styles from './Thumbs.module.css';
 
-export default function Thumbs({ items, onSelect, onLoad }) {
+export default function Thumbs({ items, onSelect, hasMore = false, onLoad }) {
   function handleClick(e, index) {
     e.stopPropagation();
     onSelect(index);
@@ -18,9 +18,11 @@ export default function Thumbs({ items, onSelect, onLoad }) {
           </div>
         );
       })}
-      <div className={styles.button} onClick={onLoad}>
-        More
-      </div>
+      {hasMore && (
+        <div className={styles.button} onClick={onLoad}>
+          More
+        </div>
+      )}
     </div>
   );
 }

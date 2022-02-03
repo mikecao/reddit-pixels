@@ -7,8 +7,6 @@ import Media from './Media';
 export default function View({ item, count }) {
   const { type, src } = getMedia(item);
 
-  console.log({ type, src });
-
   return (
     <div className={styles.view}>
       <Header item={item} />

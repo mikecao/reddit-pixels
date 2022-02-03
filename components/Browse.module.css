@@ -1,6 +1,5 @@
 .browse {
-  flex: 1;
   display: flex;
-  position: relative;
-  overflow: hidden;
+  height: 100%;
+  flex: 1;
 }

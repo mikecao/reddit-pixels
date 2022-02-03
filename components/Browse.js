@@ -50,7 +50,12 @@ export default function Browse() {
   return (
     <div className={styles.browse} onClick={handleClick}>
       <View item={item} count={`${index + 1} / ${items.length}`} />
-      <Thumbs items={items} onSelect={handleThumbClick} onLoad={handleLoadMore} />
+      <Thumbs
+        items={items}
+        onSelect={handleThumbClick}
+        hasMore={Boolean(after)}
+        onLoad={handleLoadMore}
+      />
     </div>
   );
 }
