@@ -1,5 +1,7 @@
 {
-  "name": "browse-reddit",
+  "name": "reddit-pixels",
+  "description": "Just the pixels from reddit.",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
