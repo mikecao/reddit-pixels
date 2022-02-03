@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import useStore, { init, load, reset } from 'lib/store';
+import useStore, { load, reset } from 'lib/store';
 import styles from './Browse.module.css';
 import View from './View';
 import Thumbs from './Thumbs';
 
 export default function Browse() {
   const [index, setIndex] = useState(0);
-  const { accessToken, items, after } = useStore();
+  const { items, after } = useStore();
   const router = useRouter();
   const [type, sub] = router.query?.id || [];
   const item = items[index]?.data;
@@ -27,12 +27,6 @@ export default function Browse() {
   function handleLoadMore() {
     load(type, sub, { after });
   }
-
-  useEffect(() => {
-    if (!accessToken) {
-      init();
-    }
-  }, [accessToken]);
 
   useEffect(() => {
     if (type && sub) {

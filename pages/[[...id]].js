@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>browse reddit</title>
+        <title>reddit pixels</title>
       </Head>
       <Browse />
     </>

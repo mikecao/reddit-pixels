@@ -1,24 +1,47 @@
 import fetch from 'node-fetch';
 import { useCors } from 'lib/middleware';
-import { decrypt } from 'lib/crypto';
+import {decrypt, encrypt} from 'lib/crypto';
 import { API_URL } from 'lib/constants';
+import { getAccessToken } from 'lib/api';
+import { ok, unauthorized } from "lib/response";
+
+function isValidToken(token) {
+  return token && token.expiration && Date.now() > token.expiration;
+}
+
+function parseToken(data) {
+  if (!data || data === 'null') {
+    return null;
+  }
+
+  try {
+    return  JSON.parse(decrypt(data));
+  } catch (e) {
+    return null;
+  }
+}
 
 export default async (req, res) => {
   await useCors(req, res);
 
-  let token = null;
+  let bearerToken = req.headers?.authorization?.split(' ')[1];
 
-  try {
-    token = JSON.parse(decrypt(req.headers.authorization.split(' ')[1]));
-  } catch (e) {
-    console.error(e);
+  if (!bearerToken) {
+    return unauthorized(res);
+  }
+
+  let token = parseToken(bearerToken);
+
+  if (!isValidToken(token)) {
+    token = await getAccessToken();
+    bearerToken = encrypt(JSON.stringify(token));
   }
 
   if (!token) {
-    return res.status(401).end();
+    return unauthorized(res);
   }
 
-  const { type = 'r', id = 'all', limit = 100, sort = 'hot', after } = req.body;
+  const { type = 'r', id = 'all', limit = 10, sort = 'hot', after } = req.body;
 
   let url = `${type}/${id}`;
   const params = new URLSearchParams({ sort, limit });
@@ -44,5 +67,5 @@ export default async (req, res) => {
 
   const data = await response.json();
 
-  return res.status(200).json(data);
+  return ok(res, { token: bearerToken, payload: data });
 };
