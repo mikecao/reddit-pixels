@@ -52,6 +52,7 @@ export default function Browse() {
       <View item={item} count={`${index + 1} / ${items.length}`} />
       <Thumbs
         items={items}
+        activeIndex={index}
         onSelect={handleThumbClick}
         hasMore={Boolean(after)}
         onLoad={handleLoadMore}

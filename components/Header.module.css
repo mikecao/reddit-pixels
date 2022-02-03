@@ -17,6 +17,7 @@
   background-color: rgba(0, 0, 0, 0.5);
   padding: 10px;
   border-bottom-right-radius: 5px;
+  max-width: 50%;
 }
 
 .links a {

@@ -12,9 +12,13 @@ export default function Header({ item }) {
         <div>{title}</div>
       </div>
       <div className={styles.links}>
-        <Link href={userLink}>
-          <a>{userLink}</a>
-        </Link>
+        {author !== '[deleted]' ? (
+          <Link href={userLink}>
+            <a>{userLink}</a>
+          </Link>
+        ) : (
+          userLink
+        )}
         <Link href={subLink}>
           <a>{subLink}</a>
         </Link>
