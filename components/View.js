@@ -1,11 +1,12 @@
 import { useRef } from 'react';
 import { getMedia } from 'lib/parse';
 import styles from './View.module.css';
-import Footer from './Footer';
+import Links from './Links';
 import Header from './Header';
 import Media from './Media';
+import Counter from './Counter';
 
-export default function View({ item, count, onChange }) {
+export default function View({ item, onChange }) {
   const { type, src } = getMedia(item);
   const view = useRef();
 
@@ -17,8 +18,8 @@ export default function View({ item, count, onChange }) {
     <div ref={view} className={styles.view} onClick={handleClick}>
       <Header item={item} />
       <Media type={type} src={src} />
-      <Footer item={item} />
-      <div className={styles.count}>{count}</div>
+      <Links item={item} />
+      <Counter />
     </div>
   );
 }
