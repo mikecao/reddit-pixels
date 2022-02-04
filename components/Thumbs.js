@@ -19,8 +19,12 @@ export default function Thumbs({ items, activeIndex, onSelect, hasMore = false, 
   return (
     <div ref={thumbs} className={styles.thumbs}>
       {items.map((item, index) => {
-        const { id, thumbnail, url } = item.data;
-        const src = thumbnail?.startsWith('http') ? thumbnail : url;
+        const { id, preview, thumbnail, url } = item.data;
+        let src = thumbnail;
+
+        if (!src.startsWith('http')) {
+          src = preview?.images[0]?.source?.url?.replace(/&amp;/g, '&') ||  url;
+        }
 
         return (
           <div

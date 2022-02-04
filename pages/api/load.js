@@ -41,7 +41,7 @@ export default async (req, res) => {
     return unauthorized(res);
   }
 
-  const { type = 'r', id = 'all', limit = 10, sort = 'hot', after } = req.body;
+  const { type = 'r', id = 'all', limit = 100, sort = 'hot', after } = req.body;
 
   let url = `${type}/${id}`;
   const params = new URLSearchParams({ sort, limit });
