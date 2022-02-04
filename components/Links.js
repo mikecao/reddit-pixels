@@ -13,7 +13,7 @@ export default function Links({ item }) {
   const { permalink, subreddit, author, url } = item;
 
   const links = [
-    [Message, `https://www.reddit.com/r/${permalink}`, 'comments'],
+    [Message, `https://www.reddit.com/${permalink}`, 'comments'],
     [Reddit, `https://www.reddit.com/r/${subreddit}`, 'subreddit'],
     [User, `https://www.reddit.com/user/${author}`, 'poster'],
     [Image, url, 'media'],
