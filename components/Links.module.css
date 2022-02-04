@@ -1,7 +1,7 @@
 .links {
   position: absolute;
   left: 0;
-  bottom: 20px;
+  bottom: 0;
   margin: auto;
   z-index: 1;
   padding: 10px;
@@ -9,7 +9,7 @@
   text-shadow: 1px 1px 1px #111;
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: flex-start;
 }
 
 .links a {
@@ -37,4 +37,12 @@
 
 .links a:hover .title {
   display: block;
+}
+
+.button {
+  transition: all 0.1s;
+}
+
+.button.show {
+  transform: rotate(45deg);
 }

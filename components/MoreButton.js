@@ -11,7 +11,7 @@ export default function MoreButton() {
   function handleClick() {
     load(type, id, { after }).then(() =>
       setState(state => {
-        state.index = items.length + 1;
+        state.index = items.length;
       }),
     );
   }
