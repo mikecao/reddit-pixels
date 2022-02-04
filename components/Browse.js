@@ -1,55 +1,54 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import useStore, { load, reset } from 'lib/store';
+import useStore, { load, reset, setState } from 'lib/store';
 import styles from './Browse.module.css';
 import View from './View';
 import Thumbs from './Thumbs';
-import Loading from "./Loading";
+import Loading from './Loading';
+import { log } from 'lib/utils';
 
 export default function Browse() {
-  const [index, setIndex] = useState(0);
-  const { items, after } = useStore();
+  const { index, items, after, loading } = useStore();
   const router = useRouter();
   const [type, id] = router.query?.id || [];
   const item = items[index]?.data;
+  const hasItem = items && item;
 
-  function handleThumbClick(value) {
-    setIndex(value);
-  }
-
-  function handleLoadMore() {
-    load(type, id, { after });
+  function handleThumbClick(index) {
+    setState({ index });
   }
 
   function handleChange(i) {
     if (index + i >= 0 && index + i < items.length) {
-      setIndex(state => state + i);
+      setState(state => {
+        state.index += i;
+      });
     }
   }
 
   useEffect(() => {
     if (type && id) {
       reset();
-      load(type, id).then(() => setIndex(0));
+      load(type, id);
     }
   }, [type, id]);
 
-  if (!items || !item) {
-    return <Loading />;
-  }
-
-  console.log({ items, item });
+  log({ item });
 
   return (
     <div className={styles.browse}>
-      <View item={item} count={`${index + 1} / ${items.length}`} onChange={handleChange} />
-      <Thumbs
-        items={items}
-        activeIndex={index}
-        onSelect={handleThumbClick}
-        hasMore={Boolean(after)}
-        onLoad={handleLoadMore}
-      />
+      {loading && <Loading />}
+      {hasItem && (
+        <>
+          <View item={item} count={`${index + 1} / ${items.length}`} onChange={handleChange} />
+          <Thumbs
+            items={items}
+            activeIndex={index}
+            onSelect={handleThumbClick}
+            hasMore={Boolean(after)}
+          />
+        </>
+      )}
     </div>
   );
 }

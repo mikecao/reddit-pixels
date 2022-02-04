@@ -19,17 +19,6 @@
   object-fit: cover;
 }
 
-.button {
-  width: 100px;
-  height: 100px;
-  flex: 0 0 auto;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #111;
-}
-
 .active {
   opacity: 1;
   box-shadow: 0 0 30px 10px #fff;

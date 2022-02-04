@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import styles from './Thumbs.module.css';
+import MoreButton from "./MoreButton";
 
 export default function Thumbs({ items, activeIndex, onSelect, hasMore = false, onLoad }) {
   const thumbs = useRef();
@@ -38,9 +39,8 @@ export default function Thumbs({ items, activeIndex, onSelect, hasMore = false, 
         );
       })}
       {hasMore && (
-        <div className={styles.button} onClick={onLoad}>
-          More
-        </div>
+
+        <MoreButton />
       )}
     </div>
   );
