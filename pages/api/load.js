@@ -1,12 +1,12 @@
 import fetch from 'node-fetch';
 import { useCors } from 'lib/middleware';
-import {decrypt, encrypt} from 'lib/crypto';
+import { decrypt, encrypt } from 'lib/crypto';
 import { API_URL } from 'lib/constants';
 import { getAccessToken } from 'lib/api';
-import { ok, unauthorized } from "lib/response";
+import { ok, unauthorized } from 'lib/response';
 
 function isValidToken(token) {
-  return token && token.expiration && Date.now() > token.expiration;
+  return token && token.expiration && Date.now() < token.expiration;
 }
 
 function parseToken(data) {
@@ -15,7 +15,7 @@ function parseToken(data) {
   }
 
   try {
-    return  JSON.parse(decrypt(data));
+    return JSON.parse(decrypt(data));
   } catch (e) {
     return null;
   }

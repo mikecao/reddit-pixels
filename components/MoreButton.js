@@ -3,7 +3,7 @@ import useStore, { load, setState } from 'lib/store';
 import styles from './MoreButton.module.css';
 import Loading from './Loading';
 
-export default function MoreButton() {
+export default function MoreButton({ style }) {
   const router = useRouter();
   const { loading, after, items } = useStore();
   const [type, id] = router.query?.id || [];
@@ -17,7 +17,7 @@ export default function MoreButton() {
   }
 
   return (
-    <div className={styles.button} onClick={handleClick}>
+    <div className={styles.button} style={style} onClick={handleClick}>
       {loading ? <Loading /> : 'More'}
     </div>
   );

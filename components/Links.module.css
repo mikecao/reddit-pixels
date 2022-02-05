@@ -40,7 +40,13 @@
 }
 
 .button {
+  cursor: pointer;
   transition: all 0.1s;
+  border-radius: 100%;
+}
+
+a.button {
+  border-radius: 100%;
 }
 
 .button.show {

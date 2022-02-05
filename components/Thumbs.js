@@ -1,46 +1,56 @@
-import { useEffect, useRef } from 'react';
+import { FixedSizeList as List } from 'react-window';
+import { useEffect } from 'react';
 import classNames from 'classnames';
 import styles from './Thumbs.module.css';
-import MoreButton from "./MoreButton";
+import MoreButton from './MoreButton';
+import useMeasure from './hooks/useMeasure';
 
-export default function Thumbs({ items, activeIndex, onSelect, hasMore = false, onLoad }) {
-  const thumbs = useRef();
+export default function Thumbs({ items, activeIndex, onSelect, hasMore = false }) {
+  const [ref, measurement] = useMeasure();
 
   function handleClick(e, index) {
     e.stopPropagation();
     onSelect(index);
   }
 
+  const Row = ({ index, style }) => {
+    if (index === items.length) {
+      return hasMore && <MoreButton style={style} />;
+    }
+
+    const { id, preview, thumbnail, url } = items[index].data;
+    let src = thumbnail;
+
+    if (!src.startsWith('http')) {
+      src = preview?.images[0]?.source?.url?.replace(/&amp;/g, '&') || url;
+    }
+    return (
+      <div
+        id={`thumb-${index}`}
+        key={id}
+        style={style}
+        className={classNames(styles.thumb, { [styles.active]: index === activeIndex })}
+        onClick={e => handleClick(e, index)}
+      >
+        <img src={src} alt="" />
+      </div>
+    );
+  };
+
   useEffect(() => {
     document
       .getElementById(`thumb-${activeIndex}`)
-      .scrollIntoView({ block: 'center', inline: 'nearest', behavior: 'smooth' });
+      ?.scrollIntoView({ block: 'center', inline: 'nearest', behavior: 'smooth' });
   }, [activeIndex]);
 
   return (
-    <div ref={thumbs} className={styles.thumbs}>
-      {items.map((item, index) => {
-        const { id, preview, thumbnail, url } = item.data;
-        let src = thumbnail;
-
-        if (!src.startsWith('http')) {
-          src = preview?.images[0]?.source?.url?.replace(/&amp;/g, '&') ||  url;
-        }
-
-        return (
-          <div
-            id={`thumb-${index}`}
-            key={id}
-            className={classNames(styles.thumb, { [styles.active]: index === activeIndex })}
-            onClick={e => handleClick(e, index)}
-          >
-            <img src={src} alt="" />
-          </div>
-        );
-      })}
-      {hasMore && (
-
-        <MoreButton />
+    <div ref={ref} className={styles.thumbs}>
+      {measurement?.height && (
+        <>
+          <List height={measurement.height} width={118} itemCount={items.length + 1} itemSize={100}>
+            {Row}
+          </List>
+        </>
       )}
     </div>
   );
