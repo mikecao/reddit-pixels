@@ -4,6 +4,7 @@ import { decrypt, encrypt } from 'lib/crypto';
 import { API_URL } from 'lib/constants';
 import { getAccessToken } from 'lib/api';
 import { ok, unauthorized } from 'lib/response';
+import { log } from 'lib/utils';
 
 function isValidToken(token) {
   return token && token.expiration && Date.now() < token.expiration;
@@ -41,10 +42,10 @@ export default async (req, res) => {
     return unauthorized(res);
   }
 
-  const { type = 'r', id = 'all', limit = 100, sort = 'hot', after } = req.body;
+  const { type = 'r', id = 'all', limit = 100, after } = req.body;
 
   let url = `${type}/${id}`;
-  const params = new URLSearchParams({ sort, limit });
+  const params = new URLSearchParams({ limit });
 
   if (type === 'u') {
     url = `/user/${id}/submitted`;
@@ -56,6 +57,8 @@ export default async (req, res) => {
   }
 
   const api = `${API_URL}${url}?${params.toString()}`;
+
+  log({ url: api, token: token.access_token });
 
   const response = await fetch(api, {
     headers: { Authorization: `Bearer ${token.access_token}` },
