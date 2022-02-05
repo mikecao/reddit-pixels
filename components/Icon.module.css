@@ -1,5 +1,15 @@
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .icon svg {
   fill: currentColor;
   width: 16px;
   height: 16px;
+}
+
+.label {
+  margin-left: 8px;
 }

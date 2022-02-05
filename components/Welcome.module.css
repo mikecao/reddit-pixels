@@ -1,0 +1,17 @@
+.welcome {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+.welcome ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.welcome li {
+  line-height: 30px;
+}

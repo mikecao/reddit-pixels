@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { useRouter } from 'next/router';
 import useStore, { load, reset, setState } from 'lib/store';
 import styles from './Browse.module.css';
 import View from './View';
@@ -7,10 +6,8 @@ import Thumbs from './Thumbs';
 import Loading from './Loading';
 import { log } from 'lib/utils';
 
-export default function Browse() {
+export default function Browse({ type, id }) {
   const { index, items, after, loading } = useStore();
-  const router = useRouter();
-  const [type, id] = router.query?.id || [];
   const item = items[index]?.data;
   const hasItem = items && item;
 

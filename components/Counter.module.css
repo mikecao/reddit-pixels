@@ -1,5 +1,4 @@
 .counter {
-  color: #8e8e8e;
   position: absolute;
   right: 10px;
   bottom: 10px;
@@ -8,4 +7,5 @@
   padding: 10px;
   background-color: rgba(0,0,0,0.5);
   border-radius: 5px;
+  color: #8e8e8e;
 }
