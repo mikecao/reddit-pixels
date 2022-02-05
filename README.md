@@ -1,3 +1,9 @@
 # reddit pixels
 
-When you want just the pixels from reddit.
+a better browsing experience for media from reddit.
+
+try it ⟶ https://reddit-pixels.vercel.app
+
+## License
+
+MIT
