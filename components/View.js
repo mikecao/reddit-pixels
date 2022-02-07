@@ -1,5 +1,4 @@
 import { useRef } from 'react';
-import { getMedia } from 'lib/parse';
 import styles from './View.module.css';
 import Links from './Links';
 import Header from './Header';
@@ -7,7 +6,7 @@ import Media from './Media';
 import Counter from './Counter';
 
 export default function View({ item, onChange }) {
-  const { type, src } = getMedia(item);
+  const { type, src } = item;
   const view = useRef();
 
   function handleClick(e) {

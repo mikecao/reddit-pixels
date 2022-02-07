@@ -3,7 +3,7 @@ import Icon from './Icon';
 import Dots from 'assets/dots.svg';
 import styles from './Welcome.module.css';
 
-const links = ['/r/all', '/r/pics', '/r/awww', '/r/art'];
+const links = ['/r/pics', '/r/awww', '/r/art'];
 
 export default function Welcome() {
   return (
@@ -11,7 +11,6 @@ export default function Welcome() {
       <h1>
         <Icon icon={Dots} label="reddit pixels" />
       </h1>
-      <h3>just the pixels</h3>
       <p>
         enter a <b>/r/subreddit</b> in the url
         <br />

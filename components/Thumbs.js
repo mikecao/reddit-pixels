@@ -18,12 +18,7 @@ export default function Thumbs({ items, activeIndex, onSelect, hasMore = false }
       return hasMore && <MoreButton style={style} />;
     }
 
-    const { id, preview, thumbnail, url } = items[index].data;
-    let src = thumbnail;
-
-    if (!src.startsWith('http')) {
-      src = preview?.images[0]?.source?.url?.replace(/&amp;/g, '&') || url;
-    }
+    const { id, thumbnail } = items[index];
     return (
       <div
         id={`thumb-${index}`}
@@ -32,7 +27,7 @@ export default function Thumbs({ items, activeIndex, onSelect, hasMore = false }
         className={classNames(styles.thumb, { [styles.active]: index === activeIndex })}
         onClick={e => handleClick(e, index)}
       >
-        <img src={src} alt="" />
+        <img src={thumbnail} alt="" />
       </div>
     );
   };

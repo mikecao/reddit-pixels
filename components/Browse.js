@@ -8,7 +8,7 @@ import { log } from 'lib/utils';
 
 export default function Browse({ type, id }) {
   const { index, items, after, loading } = useStore();
-  const item = items[index]?.data;
+  const item = items[index];
   const hasItem = items && item;
 
   function handleThumbClick(index) {
