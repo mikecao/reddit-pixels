@@ -5,6 +5,8 @@ import styles from './Thumbs.module.css';
 import MoreButton from './MoreButton';
 import useMeasure from './hooks/useMeasure';
 
+const blank = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
+
 export default function Thumbs({ items, activeIndex, onSelect, hasMore = false }) {
   const [ref, measurement] = useMeasure();
 
@@ -27,7 +29,7 @@ export default function Thumbs({ items, activeIndex, onSelect, hasMore = false }
         className={classNames(styles.thumb, { [styles.active]: index === activeIndex })}
         onClick={e => handleClick(e, index)}
       >
-        <img src={thumbnail} alt="" />
+        <img src={thumbnail || blank} alt="" />
       </div>
     );
   };

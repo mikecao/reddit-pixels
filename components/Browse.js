@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import useStore, { load, reset, setState } from 'lib/store';
-import styles from './Browse.module.css';
 import View from './View';
 import Thumbs from './Thumbs';
 import Loading from './Loading';
 import { log } from 'lib/utils';
+import styles from './Browse.module.css';
 
 export default function Browse({ type, id }) {
   const { index, items, after, loading } = useStore();
@@ -46,6 +46,7 @@ export default function Browse({ type, id }) {
           />
         </>
       )}
+      {!loading && !hasItem && <div className={styles.message}>nothing here.</div>}
     </div>
   );
 }

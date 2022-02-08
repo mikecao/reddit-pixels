@@ -18,7 +18,8 @@ export default function Home() {
       <Head>
         <title>reddit pixels</title>
       </Head>
-      {browse ? <Browse type={type} id={id.join('/')} /> : <Welcome />}
+      {!browse && <Welcome />}
+      {browse && <Browse type={type} id={id.join('/')} />}
     </>
   );
 }
