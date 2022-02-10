@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import styles from './View.module.css';
 import Links from './Links';
 import Header from './Header';
@@ -9,7 +9,14 @@ import { load } from 'lib/store';
 export default function View({ category, url, item, items, after, loading, onChange }) {
   const { type, src } = item;
   const activeIndex = items.indexOf(item);
+  const nextItem = items[activeIndex + 1];
   const view = useRef();
+
+  useEffect(() => {
+    if (nextItem && nextItem.type === 'image') {
+      new Image().src = nextItem.src;
+    }
+  }, [nextItem]);
 
   async function handleClick(e) {
     if (loading) {
@@ -17,12 +24,10 @@ export default function View({ category, url, item, items, after, loading, onCha
     }
 
     if (e.clientX / view.current.clientWidth > 0.5) {
-      const newItem = items[activeIndex + 1];
-
-      if (!newItem) {
+      if (!nextItem) {
         load(category, url, { after });
       } else {
-        onChange(newItem);
+        onChange(nextItem);
       }
     } else {
       onChange(activeIndex > 0 ? items[activeIndex - 1] : item);
