@@ -6,7 +6,7 @@ import Loading from './Loading';
 import { log } from 'lib/utils';
 import styles from './Browse.module.css';
 
-export default function Browse({ category, url }) {
+export default function Browse({ category, path }) {
   const { item, items, after, loading } = useStore();
   const hasItem = items && item;
 
@@ -15,11 +15,11 @@ export default function Browse({ category, url }) {
   }
 
   useEffect(() => {
-    if (category && url) {
+    if (category && path) {
       reset();
-      load(category, url);
+      load(category, path);
     }
-  }, [category, url]);
+  }, [category, path]);
 
   log({ item });
 
@@ -30,7 +30,7 @@ export default function Browse({ category, url }) {
         <>
           <View
             category={category}
-            url={url}
+            path={path}
             item={item}
             items={items}
             after={after}

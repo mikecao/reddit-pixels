@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 
 export default function useRoute() {
   const router = useRouter();
-  const [category, ...url] = router.query?.params || [];
+  const [category, ...path] = router.query?.params || [];
 
-  return { category, url };
+  return { category, path };
 }

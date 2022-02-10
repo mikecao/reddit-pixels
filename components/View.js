@@ -6,7 +6,7 @@ import Media from './Media';
 import Counter from './Counter';
 import { load } from 'lib/store';
 
-export default function View({ category, url, item, items, after, loading, onChange }) {
+export default function View({ category, path, item, items, after, loading, onChange }) {
   const { type, src } = item;
   const activeIndex = items.indexOf(item);
   const nextItem = items[activeIndex + 1];
@@ -25,7 +25,7 @@ export default function View({ category, url, item, items, after, loading, onCha
 
     if (e.clientX / view.current.clientWidth > 0.5) {
       if (!nextItem) {
-        load(category, url, { after });
+        load(category, path, { after });
       } else {
         onChange(nextItem);
       }

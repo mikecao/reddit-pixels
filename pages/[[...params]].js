@@ -6,13 +6,13 @@ import useRoute from 'components/hooks/useRoute';
 
 export default function Home() {
   const router = useRouter();
-  const { category, url } = useRoute();
+  const { category, path } = useRoute();
 
   if (!router.isReady) {
     return null;
   }
 
-  const browse = Boolean(category && url);
+  const browse = Boolean(category && path);
 
   return (
     <>
@@ -20,7 +20,7 @@ export default function Home() {
         <title>reddit pixels</title>
       </Head>
       {!browse && <Welcome />}
-      {browse && <Browse category={category} url={url.join('/')} />}
+      {browse && <Browse category={category} path={path.join('/')} />}
     </>
   );
 }

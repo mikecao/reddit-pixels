@@ -5,10 +5,10 @@ import styles from './MoreButton.module.css';
 
 export default function MoreButton({ style }) {
   const { loading, after } = useStore();
-  const { category, url } = useRoute();
+  const { category, path } = useRoute();
 
   function handleClick() {
-    load(category, url, { after });
+    load(category, path, { after });
   }
 
   return (

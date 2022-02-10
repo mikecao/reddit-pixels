@@ -6,7 +6,7 @@ import { getAccessToken } from 'lib/api';
 import { ok, unauthorized } from 'lib/response';
 import { log } from 'lib/utils';
 
-function isValidToken(token) {
+function isValurlToken(token) {
   return token && token.expiration && Date.now() < token.expiration;
 }
 
@@ -33,7 +33,7 @@ export default async (req, res) => {
 
   let token = parseToken(bearerToken);
 
-  if (!isValidToken(token)) {
+  if (!isValurlToken(token)) {
     token = await getAccessToken();
     bearerToken = encrypt(JSON.stringify(token));
   }
@@ -42,13 +42,13 @@ export default async (req, res) => {
     return unauthorized(res);
   }
 
-  const { type = 'r', id = 'all', limit = 100, after } = req.body;
+  const { category = 'r', path = 'all', limit = 100, after } = req.body;
 
-  let url = `${type}/${id}`;
+  let url = `${category}/${path}`;
   const params = new URLSearchParams({ limit });
 
-  if (type === 'u') {
-    url = `/user/${id}/submitted`;
+  if (category === 'u') {
+    url = `/user/${url}/submitted`;
     params.set('sort', 'new');
   }
 
