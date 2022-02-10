@@ -3,14 +3,14 @@ import Icon from './Icon';
 import Dots from 'assets/dots.svg';
 import styles from './Welcome.module.css';
 
-const links = ['/r/pics', '/r/awww', '/r/art'];
+const links = ['/r/pics', '/r/art', '/r/comics', '/r/awww'];
 
 export default function Welcome() {
   return (
     <div className={styles.welcome}>
-      <h1>
+      <h3>
         <Icon icon={Dots} label="reddit pixels" />
-      </h1>
+      </h3>
       <p>
         enter a <b>/r/subreddit</b> in the url
         <br />
