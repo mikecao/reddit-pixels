@@ -48,7 +48,7 @@ export default async (req, res) => {
   const params = new URLSearchParams({ limit });
 
   if (category === 'u') {
-    url = `/user/${url}/submitted`;
+    url = `/user/${path}/submitted`;
     params.set('sort', 'new');
   }
 
