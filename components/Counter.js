@@ -1,12 +1,9 @@
-import useStore from 'lib/store';
 import styles from './Counter.module.css';
 
-export default function Counter() {
-  const { index, items } = useStore();
-
+export default function Counter({ current, total }) {
   return (
     <div className={styles.counter}>
-      {index + 1} / {items.length}
+      {current} / {total}
     </div>
   );
 }

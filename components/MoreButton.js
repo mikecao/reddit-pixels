@@ -1,19 +1,14 @@
-import { useRouter } from 'next/router';
-import useStore, { load, setState } from 'lib/store';
+import useRoute from 'components/hooks/useRoute';
+import Loading from 'components/Loading';
+import useStore, { load } from 'lib/store';
 import styles from './MoreButton.module.css';
-import Loading from './Loading';
 
 export default function MoreButton({ style }) {
-  const router = useRouter();
-  const { loading, after, items } = useStore();
-  const [type, id] = router.query?.id || [];
+  const { loading, after } = useStore();
+  const { category, url } = useRoute();
 
   function handleClick() {
-    load(type, id, { after }).then(() =>
-      setState(state => {
-        state.index = items.length;
-      }),
-    );
+    load(category, url, { after });
   }
 
   return (

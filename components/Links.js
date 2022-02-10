@@ -41,7 +41,7 @@ export default function Links({ item }) {
             target="_blank"
             rel="noreferrer"
             onClick={handleClick}
-            download={`${id}.${getExtension(url)}`}
+            download={`${id}${getExtension(url)}`}
           >
             <Icon icon={icon} />
             <div className={styles.title}>{title}</div>

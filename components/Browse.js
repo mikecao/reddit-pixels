@@ -6,44 +6,38 @@ import Loading from './Loading';
 import { log } from 'lib/utils';
 import styles from './Browse.module.css';
 
-export default function Browse({ type, id }) {
-  const { index, items, after, loading } = useStore();
-  const item = items[index];
+export default function Browse({ category, url }) {
+  const { item, items, after, loading } = useStore();
   const hasItem = items && item;
 
-  function handleThumbClick(index) {
-    setState({ index });
-  }
-
-  function handleChange(i) {
-    if (index + i >= 0 && index + i < items.length) {
-      setState(state => {
-        state.index += i;
-      });
-    }
+  function handleChange(item) {
+    setState({ item });
   }
 
   useEffect(() => {
-    if (type && id) {
+    if (category && url) {
       reset();
-      load(type, id);
+      load(category, url);
     }
-  }, [type, id]);
+  }, [category, url]);
 
   log({ item });
 
   return (
     <div className={styles.browse}>
       {loading && <Loading />}
-      {hasItem && (
+      {item && (
         <>
-          <View item={item} count={`${index + 1} / ${items.length}`} onChange={handleChange} />
-          <Thumbs
+          <View
+            category={category}
+            url={url}
+            item={item}
             items={items}
-            activeIndex={index}
-            onSelect={handleThumbClick}
-            hasMore={Boolean(after)}
+            after={after}
+            loading={loading}
+            onChange={handleChange}
           />
+          <Thumbs item={item} items={items} onSelect={handleChange} hasMore={Boolean(after)} />
         </>
       )}
       {!loading && !hasItem && <div className={styles.message}>nothing here.</div>}

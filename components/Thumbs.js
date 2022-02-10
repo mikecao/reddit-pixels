@@ -7,12 +7,13 @@ import useMeasure from './hooks/useMeasure';
 
 const blank = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
 
-export default function Thumbs({ items, activeIndex, onSelect, hasMore = false }) {
+export default function Thumbs({ item, items, onSelect, hasMore = false }) {
   const [ref, measurement] = useMeasure();
+  const activeIndex = items.indexOf(item);
 
   function handleClick(e, index) {
     e.stopPropagation();
-    onSelect(index);
+    onSelect(items[index]);
   }
 
   const Row = ({ index, style }) => {
@@ -20,11 +21,10 @@ export default function Thumbs({ items, activeIndex, onSelect, hasMore = false }
       return hasMore && <MoreButton style={style} />;
     }
 
-    const { id, thumbnail } = items[index];
+    const { thumbnail } = items[index];
     return (
       <div
         id={`thumb-${index}`}
-        key={id}
         style={style}
         className={classNames(styles.thumb, { [styles.active]: index === activeIndex })}
         onClick={e => handleClick(e, index)}
@@ -44,7 +44,13 @@ export default function Thumbs({ items, activeIndex, onSelect, hasMore = false }
     <div ref={ref} className={styles.thumbs}>
       {measurement?.height && (
         <>
-          <List height={measurement.height} width={118} itemCount={items.length + 1} itemSize={100}>
+          <List
+            height={measurement.height}
+            width={118}
+            itemCount={items.length + 1}
+            itemSize={100}
+            overscanCount={5}
+          >
             {Row}
           </List>
         </>
