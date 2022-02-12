@@ -35,11 +35,12 @@ export default function View({ category, path, item, items, after, loading, onCh
   }
 
   return (
-    <div ref={view} className={styles.view} onClick={handleClick}>
+    <div ref={view} className={styles.view}>
       <Header item={item} />
       <Media type={type} src={src} />
       <Links item={item} />
       <Counter current={activeIndex + 1} total={items.length} />
+      <div className={styles.overlay} onClick={handleClick} />
     </div>
   );
 }
