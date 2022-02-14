@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useEffect } from 'react';
 import styles from './View.module.css';
 import Links from './Links';
 import Header from './Header';
@@ -10,7 +10,6 @@ export default function View({ category, path, item, items, after, loading, onCh
   const { id, type, src } = item;
   const activeIndex = items.indexOf(item);
   const nextItem = items[activeIndex + 1];
-  const view = useRef();
 
   useEffect(() => {
     if (nextItem && nextItem.type === 'image') {
@@ -18,29 +17,34 @@ export default function View({ category, path, item, items, after, loading, onCh
     }
   }, [nextItem]);
 
-  async function handleClick(e) {
+  async function handlePrevious() {
     if (loading) {
       return;
     }
 
-    if (e.clientX / view.current.clientWidth > 0.5) {
-      if (!nextItem) {
-        load(category, path, { after });
-      } else {
-        onChange(nextItem);
-      }
+    onChange(activeIndex > 0 ? items[activeIndex - 1] : item);
+  }
+
+  async function handleNext() {
+    if (loading) {
+      return;
+    }
+
+    if (!nextItem) {
+      load(category, path, { after });
     } else {
-      onChange(activeIndex > 0 ? items[activeIndex - 1] : item);
+      onChange(nextItem);
     }
   }
 
   return (
-    <div key={id} ref={view} className={styles.view}>
+    <div key={id} className={styles.view}>
       <Header item={item} />
       <Media type={type} src={src} />
       <Links item={item} />
       <Counter current={activeIndex + 1} total={items.length} />
-      <div className={styles.overlay} onClick={handleClick} />
+      <div className={styles.left} onClick={handlePrevious} />
+      <div className={styles.right} onClick={handleNext} />
     </div>
   );
 }
