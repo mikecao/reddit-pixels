@@ -6,7 +6,7 @@ import { getAccessToken } from 'lib/api';
 import { ok, unauthorized } from 'lib/response';
 import { log } from 'lib/utils';
 
-function isValurlToken(token) {
+function isValidToken(token) {
   return token && token.expiration && Date.now() < token.expiration;
 }
 
@@ -33,7 +33,7 @@ export default async (req, res) => {
 
   let token = parseToken(bearerToken);
 
-  if (!isValurlToken(token)) {
+  if (!isValidToken(token)) {
     token = await getAccessToken();
     bearerToken = encrypt(JSON.stringify(token));
   }
