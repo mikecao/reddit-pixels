@@ -7,7 +7,7 @@ import Counter from './Counter';
 import { load } from 'lib/store';
 
 export default function View({ category, path, item, items, after, loading, onChange }) {
-  const { type, src } = item;
+  const { id, type, src } = item;
   const activeIndex = items.indexOf(item);
   const nextItem = items[activeIndex + 1];
   const view = useRef();
@@ -35,7 +35,7 @@ export default function View({ category, path, item, items, after, loading, onCh
   }
 
   return (
-    <div ref={view} className={styles.view}>
+    <div key={id} ref={view} className={styles.view}>
       <Header item={item} />
       <Media type={type} src={src} />
       <Links item={item} />
