@@ -44,7 +44,7 @@ export default async (req, res) => {
 
   const { category = 'r', path = 'all', limit = 100, after } = req.body;
 
-  let url = `${category}/${path}`;
+  let url = `/${category}/${path}`;
   const params = new URLSearchParams({ limit });
 
   if (category === 'u') {

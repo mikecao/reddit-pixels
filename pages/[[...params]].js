@@ -20,7 +20,7 @@ export default function Home() {
         <title>reddit pixels</title>
       </Head>
       {!browse && <Welcome />}
-      {browse && <Browse category={category} path={path.join('/')} />}
+      {browse && <Browse category={category} path={path} />}
     </>
   );
 }
