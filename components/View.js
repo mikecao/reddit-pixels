@@ -30,10 +30,10 @@ export default function View({ category, path, item, items, after, loading, onCh
       return;
     }
 
-    if (!nextItem) {
-      load(category, path, { after });
-    } else {
+    if (nextItem) {
       onChange(nextItem);
+    } else if (after) {
+      load(category, path, { after });
     }
   }
 
