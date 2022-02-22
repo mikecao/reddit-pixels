@@ -1,15 +1,20 @@
 import { useEffect } from 'react';
-import styles from './View.module.css';
+import { useSwipeable } from 'react-swipeable';
 import Links from './Links';
 import Header from './Header';
 import Media from './Media';
 import Counter from './Counter';
 import { load } from 'lib/store';
+import styles from './View.module.css';
 
 export default function View({ category, path, item, items, after, loading, onChange }) {
   const { type, src } = item;
   const activeIndex = items.indexOf(item);
   const nextItem = items[activeIndex + 1];
+  const handlers = useSwipeable({
+    onSwipedLeft: handleNext,
+    onSwipedRight: handlePrevious,
+  });
 
   useEffect(() => {
     if (nextItem && nextItem.type === 'image') {
@@ -38,7 +43,7 @@ export default function View({ category, path, item, items, after, loading, onCh
   }
 
   return (
-    <div className={styles.view}>
+    <div {...handlers} className={styles.view}>
       <Header item={item} />
       <Media type={type} src={src} />
       <Links item={item} />

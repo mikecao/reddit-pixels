@@ -3,7 +3,7 @@ import styles from './Header.module.css';
 
 export default function Header({ item }) {
   const { title, subreddit, author } = item;
-  const subLink = `/r/${subreddit}`;
+  const subLink = subreddit ? `/r/${subreddit}` : undefined;
   const userLink = `/u/${author}`;
 
   return (
@@ -19,9 +19,11 @@ export default function Header({ item }) {
         ) : (
           userLink
         )}
-        <Link href={subLink}>
-          <a>{subLink}</a>
-        </Link>
+        {subLink && (
+          <Link href={subLink}>
+            <a>{subLink}</a>
+          </Link>
+        )}
       </div>
     </div>
   );
