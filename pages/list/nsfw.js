@@ -33,11 +33,8 @@ const list = [
           '/r/truefmk',
           '/r/nudes',
           '/r/slut',
+          '/r/lipsthatgrip',
         ],
-      },
-      {
-        category: 'Looking for',
-        items: ['/r/TipOfMyPenis', '/r/pornID'],
       },
     ],
   },
@@ -245,7 +242,6 @@ const list = [
     category: 'Blowjobs',
     items: [
       '/r/blowjobs',
-      '/r/lipsthatgrip',
       '/r/deepthroat',
       '/r/onherknees',
       '/r/blowjobsandwich',
@@ -802,6 +798,10 @@ const list = [
   {
     category: 'Videos',
     items: ['/r/pornvids', '/r/nsfw_videos'],
+  },
+  {
+    category: 'Looking for',
+    items: ['/r/TipOfMyPenis', '/r/pornID'],
   },
   {
     category: 'Other',
