@@ -9,6 +9,7 @@ import Image from 'assets/image.svg';
 import Plus from 'assets/plus.svg';
 import Expand from 'assets/expand.svg';
 import Compress from 'assets/compress.svg';
+import Home from 'assets/home.svg';
 import styles from './Links.module.css';
 
 export default function Links({ item }) {
@@ -57,9 +58,9 @@ export default function Links({ item }) {
             rel="noreferrer"
             onClick={handleClick}
             download={`${id}${getExtension(url)}`}
+            title={title}
           >
             <Icon icon={icon} />
-            <div className={styles.title}>{title}</div>
           </a>
         ))}
       <a className={classNames(styles.button, { [styles.show]: show })} onClick={handleShow}>
@@ -68,10 +69,13 @@ export default function Links({ item }) {
       {show && (
         <div className={styles.options}>
           {document.fullscreenEnabled && (
-            <a onClick={handleFullscreen}>
+            <a onClick={handleFullscreen} title="fullscreen">
               <Icon icon={fullscreen ? Compress : Expand} />
             </a>
           )}
+          <a href="/" title="home">
+            <Icon icon={Home} />
+          </a>
         </div>
       )}
     </div>

@@ -1,11 +1,11 @@
 import Link from 'next/link';
 import Icon from './Icon';
 import Dots from 'assets/dots.svg';
-import styles from './Welcome.module.css';
+import styles from './Home.module.css';
 
 const links = ['/r/pics', '/r/art', '/r/comics', '/r/awww'];
 
-export default function Welcome() {
+export default function Home() {
   return (
     <div className={styles.welcome}>
       <h3>
@@ -23,6 +23,12 @@ export default function Welcome() {
           </li>
         ))}
       </ul>
+      <p>
+        <a href="/list">more subreddits →</a>
+      </p>
+      <p>
+        <a href="/list/nsfw">nsfw subreddits →</a>
+      </p>
     </div>
   );
 }
