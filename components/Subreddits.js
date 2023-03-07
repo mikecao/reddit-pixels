@@ -23,7 +23,8 @@ export default function Subreddits({ list }) {
           <p>
             <a
               href={`/r/${(parts.length ? parts : all)
-                .map(part => part.replace('/r/', ''))
+                .map(part => part.toLowerCase().replace('/r/', ''))
+                .sort()
                 .join('+')}`}
             >
               combined →
