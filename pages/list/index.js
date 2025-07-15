@@ -104,7 +104,6 @@ const list = [
           '/r/fitandnatural',
           '/r/wrestlewiththeplot',
           '/r/skinnywithabs',
-          '/r/bois',
           '/r/GentlemanBonersGifs',
         ],
       },
