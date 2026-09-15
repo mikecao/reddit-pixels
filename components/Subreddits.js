@@ -1,34 +1,39 @@
+import Link from 'next/link';
 import styles from './Subreddits.module.css';
 
 export default function Subreddits({ list }) {
-  const renderItems = ({ category, items }, all = []) => {
+  const renderItems = ({ category, items }, all = [], keyPrefix = category) => {
     const parts = [];
     return (
-      <div key={category} className={styles.category}>
+      <div key={keyPrefix} className={styles.category}>
         <header>{category}</header>
         <ul>
-          {items.map(item => {
+          {items.map((item, index) => {
+            const itemKey = `${keyPrefix}-${index}`;
+
             if (typeof item === 'string') {
               parts.push(item);
               all.push(item);
               return (
-                <li key={item}>
-                  <a href={item}>{item}</a>
+                <li key={`${itemKey}-${item}`}>
+                  <Link href={item}>{item}</Link>
                 </li>
               );
             } else if (typeof item === 'object') {
-              return renderItems(item, all);
+              return renderItems(item, all, itemKey);
             }
+
+            return null;
           })}
           <p>
-            <a
+            <Link
               href={`/r/${(parts.length ? parts : all)
                 .map(part => part.toLowerCase().replace('/r/', ''))
                 .sort()
                 .join('+')}`}
             >
               combined →
-            </a>
+            </Link>
           </p>
         </ul>
       </div>
@@ -37,7 +42,7 @@ export default function Subreddits({ list }) {
 
   return (
     <div className={styles.container}>
-      <a href="/">← home</a>
+      <Link href="/">← home</Link>
       {list.map(item => renderItems(item))}
     </div>
   );

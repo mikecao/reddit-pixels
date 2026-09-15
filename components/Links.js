@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Link from 'next/link';
 import classNames from 'classnames';
 import Icon from './Icon';
 import { getExtension } from 'lib/utils';
@@ -73,9 +74,9 @@ export default function Links({ item }) {
               <Icon icon={fullscreen ? Compress : Expand} />
             </a>
           )}
-          <a href="/" title="home">
+          <Link href="/" title="home">
             <Icon icon={Home} />
-          </a>
+          </Link>
         </div>
       )}
     </div>

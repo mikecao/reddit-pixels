@@ -1,10 +1,10 @@
-import fetch from 'node-fetch';
-import { useCors } from 'lib/middleware';
+import { NextResponse } from 'next/server';
 import { decrypt, encrypt } from 'lib/crypto';
 import { API_URL } from 'lib/constants';
 import { getAccessToken } from 'lib/api';
-import { ok, unauthorized } from 'lib/response';
 import { log } from 'lib/utils';
+
+export const runtime = 'nodejs';
 
 function isValidToken(token) {
   return token && token.expiration && Date.now() < token.expiration;
@@ -17,18 +17,16 @@ function parseToken(data) {
 
   try {
     return JSON.parse(decrypt(data));
-  } catch (e) {
+  } catch {
     return null;
   }
 }
 
-export default async (req, res) => {
-  await useCors(req, res);
-
-  let bearerToken = req.headers?.authorization?.split(' ')[1];
+export async function POST(request) {
+  let bearerToken = request.headers.get('authorization')?.split(' ')[1];
 
   if (!bearerToken) {
-    return unauthorized(res);
+    return new NextResponse('401 Unauthorized', { status: 401 });
   }
 
   let token = parseToken(bearerToken);
@@ -39,13 +37,13 @@ export default async (req, res) => {
   }
 
   if (!token) {
-    return unauthorized(res);
+    return new NextResponse('401 Unauthorized', { status: 401 });
   }
 
-  const { category = 'r', path = 'all', limit = 100, after } = req.body;
+  const { category = 'r', path = 'all', limit = 100, after } = await request.json();
 
   let url = `/${category}/${path}`;
-  const params = new URLSearchParams({ limit });
+  const params = new URLSearchParams({ limit: String(limit) });
 
   if (category === 'u') {
     url = `/user/${path}/submitted`;
@@ -61,14 +59,15 @@ export default async (req, res) => {
   log({ url: api, token: token.access_token });
 
   const response = await fetch(api, {
+    cache: 'no-store',
     headers: { Authorization: `Bearer ${token.access_token}` },
   });
 
   if (!response.ok) {
-    return res.status(response.status).end(response.statusText);
+    return new NextResponse(response.statusText, { status: response.status });
   }
 
   const data = await response.json();
 
-  return ok(res, { token: bearerToken, payload: data });
-};
+  return NextResponse.json({ token: bearerToken, payload: data });
+}

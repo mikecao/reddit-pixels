@@ -24,10 +24,10 @@ export default function Home() {
         ))}
       </ul>
       <p>
-        <a href="/list">more subreddits →</a>
+        <Link href="/list">more subreddits →</Link>
       </p>
       <p>
-        <a href="/list/nsfw">nsfw subreddits →</a>
+        <Link href="/list/nsfw">nsfw subreddits →</Link>
       </p>
     </div>
   );

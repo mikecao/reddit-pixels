@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect } from 'react';
 import useStore, { load, reset, setState } from 'lib/store';
 import View from './View';
@@ -37,7 +39,14 @@ export default function Browse({ category, path }) {
             loading={loading}
             onChange={handleChange}
           />
-          <Thumbs item={item} items={items} onSelect={handleChange} hasMore={Boolean(after)} />
+          <Thumbs
+            category={category}
+            path={path}
+            item={item}
+            items={items}
+            onSelect={handleChange}
+            hasMore={Boolean(after)}
+          />
         </>
       )}
       {!loading && !hasItem && <div className={styles.message}>nothing here.</div>}

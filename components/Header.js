@@ -12,18 +12,8 @@ export default function Header({ item }) {
         <div>{title}</div>
       </div>
       <div className={styles.links}>
-        {author !== '[deleted]' ? (
-          <Link href={userLink}>
-            <a>{userLink}</a>
-          </Link>
-        ) : (
-          userLink
-        )}
-        {subLink && (
-          <Link href={subLink}>
-            <a>{subLink}</a>
-          </Link>
-        )}
+        {author !== '[deleted]' ? <Link href={userLink}>{userLink}</Link> : userLink}
+        {subLink && <Link href={subLink}>{subLink}</Link>}
       </div>
     </div>
   );

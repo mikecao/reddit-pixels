@@ -1,11 +1,9 @@
-import useRoute from 'components/hooks/useRoute';
 import Loading from 'components/Loading';
 import useStore, { load } from 'lib/store';
 import styles from './MoreButton.module.css';
 
-export default function MoreButton({ style }) {
+export default function MoreButton({ category, path, style }) {
   const { loading, after } = useStore();
-  const { category, path } = useRoute();
 
   function handleClick() {
     load(category, path, { after });

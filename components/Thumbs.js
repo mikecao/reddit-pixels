@@ -7,7 +7,7 @@ import useMeasure from './hooks/useMeasure';
 
 const blank = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==';
 
-export default function Thumbs({ item, items, onSelect, hasMore = false }) {
+export default function Thumbs({ category, path, item, items, onSelect, hasMore = false }) {
   const [ref, measurement] = useMeasure();
   const activeIndex = items.indexOf(item);
   const listRef = useRef();
@@ -19,7 +19,7 @@ export default function Thumbs({ item, items, onSelect, hasMore = false }) {
 
   const Row = ({ index, style }) => {
     if (index === items.length) {
-      return hasMore && <MoreButton style={style} />;
+      return hasMore && <MoreButton category={category} path={path} style={style} />;
     }
 
     const { thumbnail } = items[index];
