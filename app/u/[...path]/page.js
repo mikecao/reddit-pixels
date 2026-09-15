@@ -1,5 +1,7 @@
 import Browse from 'components/Browse';
 
-export default function UserBrowsePage({ params }) {
-  return <Browse category="u" path={params.path.join('/')} />;
+export default async function UserBrowsePage({ params }) {
+  const { path } = await params;
+
+  return <Browse category="u" path={path.join('/')} />;
 }
